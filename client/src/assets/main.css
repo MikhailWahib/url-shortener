@@ -1,0 +1,41 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+.btn {
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 10px;
+  transition: opacity 0.3s;
+  padding: 0.5rem;
+}
+
+.btn:hover {
+  opacity: 0.5;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+}
+
+.btn-primary {
+  color: black;
+  background-color: white;
+}
+
+.btn-secondary {
+  color: white;
+  background-color: none;
+  border: 1px solid white;
+}
+
+::selection {
+  background-color: white;
+  color: black;
+}

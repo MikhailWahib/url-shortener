@@ -1,0 +1,26 @@
+{
+  "name": "url-shortener-monorepo",
+  "version": "1.0.0",
+  "description": "URL Shortener monorepo with client and server",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm run dev:server\" \"pnpm run dev:client\"",
+    "dev:client": "pnpm --filter @url-shortener/client dev",
+    "dev:server": "pnpm --filter @url-shortener/server dev",
+    "build": "pnpm --filter @url-shortener/client build && pnpm --filter @url-shortener/server build",
+    "build:client": "pnpm --filter @url-shortener/client build",
+    "build:server": "pnpm --filter @url-shortener/server build",
+    "start": "pnpm --filter @url-shortener/server start",
+    "install:all": "pnpm install",
+    "clean": "pnpm --filter @url-shortener/client clean && pnpm --filter @url-shortener/server clean",
+    "test": "pnpm --filter @url-shortener/client test && pnpm --filter @url-shortener/server test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}
