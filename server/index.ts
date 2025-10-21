@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser"
 import morgan from "morgan"
 
 import routes from "./routes"
-import { db } from "./db/db"
 import { handleRedirect } from "./controllers/urlRedirectController"
 
 dotenv.config()
