@@ -1,41 +1,108 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
+  width: 100%;
+  margin: 0;
+  padding: 0;
   font-weight: normal;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .btn {
   width: 100%;
   font-size: 1rem;
-  border-radius: 10px;
-  transition: opacity 0.3s;
-  padding: 0.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  padding: 0.875rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 50px;
+  font-family: inherit;
 }
 
-.btn:hover {
-  opacity: 0.5;
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-primary {
-  color: black;
-  background-color: white;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.5);
 }
 
 .btn-secondary {
-  color: white;
-  background-color: none;
-  border: 1px solid white;
+  color: #667eea;
+  background: white;
+  border: 2px solid #667eea;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #f7fafc;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 ::selection {
-  background-color: white;
-  color: black;
+  background-color: #667eea;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #667eea;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  #app {
+    padding: 0;
+  }
+
+  .btn {
+    padding: 0.75rem 1.25rem;
+  }
 }

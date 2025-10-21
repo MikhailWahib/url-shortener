@@ -1,7 +1,14 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <input type="text" v-model="input" />
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="input-wrapper">
+            <input type="text" v-model="input" placeholder="Enter your long URL here..." />
+            <button type="submit" class="btn btn-primary">
+                Shorten URL
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
     </form>
 </template>
 
@@ -57,28 +64,74 @@ const onSubmit = async () => {
 
 <style scoped>
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
     width: 100%;
-    margin-top: 1rem;
+    margin-bottom: 2rem;
+    animation: slideUp 0.6s ease-out 0.2s backwards;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 input {
-    width: 100%;
-    padding: 0.5rem;
-    color: white;
+    flex: 1;
+    padding: 1rem 1.25rem;
+    color: #2d3748;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
+    border: none;
     font-size: 1rem;
-    transition: border 0.1s;
+    font-weight: 500;
+}
+
+input::placeholder {
+    color: #a0aec0;
 }
 
 input:focus {
     outline: none;
-    border: 1px solid white;
+}
+
+.btn {
+    flex: .5;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.arrow-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover:not(:disabled) .arrow-icon {
+    transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .input-wrapper {
+        flex-direction: column;
+        padding: 0.75rem;
+    }
+
+    input {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
 }
 </style>

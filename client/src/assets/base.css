@@ -27,7 +27,7 @@ body {
   min-height: 100dvh;
   min-height: 100vh;
   color: white;
-  background-color: black;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   line-height: 1.6;
   font-family:
     Inter,
