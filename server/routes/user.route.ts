@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { handleLogin, handleRegister, handleLogout, getUserUrls } from "../controllers/userController"
-import { userValidation } from "../validators/users"
+import { handleLogin, handleRegister, handleLogout, getUserUrls } from "../controllers/user.controller"
+import { userValidation } from "../validators/user.validator"
 import { protect } from "../middlewares/protect"
 
 const router = Router()

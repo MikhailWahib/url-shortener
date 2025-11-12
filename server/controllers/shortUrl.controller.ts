@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
-import { findOriginalUrlByCode, createUrl } from "../repositories/urls"
+import { createUrl } from "../repositories/url.repository"
 import { validationResult } from "express-validator"
+import { BASE_URL } from "../constants"
 
 export const handleShortenUrl = async (req: Request, res: Response) => {
 	try {
@@ -9,9 +10,9 @@ export const handleShortenUrl = async (req: Request, res: Response) => {
 			return res.status(400).json({ errors: errors.array() })
 		}
 
-		const { url } = req.body
+		const { url }: { url: string } = req.body
 		const shortUrlCode = Math.random().toString(36).slice(2, 8)
-		const shortUrl = `${req.protocol}://${req.get("host")}/s/${shortUrlCode}`
+		const shortUrl = `${BASE_URL}/s/${shortUrlCode}`
 		const insertedOriginalUrl = url.startsWith("https://") ? url : `https://${url}`
 
 		const result = await createUrl(

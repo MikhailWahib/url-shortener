@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { handleShortenUrl } from "../controllers/shortUrlController"
-import { urlValidation } from "../validators/urls"
+import { handleShortenUrl } from "../controllers/shortUrl.controller"
+import { urlValidation } from "../validators/url.validator"
 import { protect } from "../middlewares/protect"
 
 const router = Router()

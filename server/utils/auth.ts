@@ -1,8 +1,8 @@
 import { Response } from "express"
 import jwt from "jsonwebtoken"
-import { User } from "../types"
+import { User } from "../repositories/user.repository"
 
-export const signToken = (user: User, res: Response) => {
+export const signToken = (user: Omit<User, "password">, res: Response) => {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
         expiresIn: "7d",
     })
