@@ -1,6 +1,6 @@
 import { db } from "../db/db"
 
-export interface Url {
+export type Url = {
     id: number;
     original_url: string;
     user_id: number;
@@ -12,18 +12,25 @@ export const createUrl = async (
     originalUrl: string,
     userId: number,
     shortUrlCode: string
-): Promise<Url[]> => {
+): Promise<Url> => {
     const query = `INSERT INTO urls (original_url, user_id,short_url) VALUES ($1, $2, $3) RETURNING *;`
-    const result = await db.query(query, [originalUrl, userId, shortUrlCode])
-    return result as unknown as Url[]
+    const rows = await db.query(query, [originalUrl, userId, shortUrlCode]) as Url[]
+    if (!rows || rows.length === 0) {
+        throw new Error("Failed to create URL")
+    }
+    return rows[0]
 }
 
-export const findOriginalUrlByCode = async (
+export const getOriginalUrlByCode = async (
     shortUrl: string
-): Promise<Url[]> => {
+): Promise<string | null> => {
     const query = `SELECT * FROM urls WHERE short_url = $1;`
-    const result = await db.query(query, [shortUrl])
-    return result as unknown as Url[]
+    const rows = await db.query(query, [shortUrl]) as Url[]
+    if (!rows || rows.length === 0) {
+        return null
+    }
+
+    return rows[0].original_url
 }
 
 export const incrementClicks = async (shortUrlCode: string): Promise<void> => {

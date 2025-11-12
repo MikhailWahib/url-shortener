@@ -1,6 +1,6 @@
 import { createUrlsTable, createUsersTable } from "./db/schema"
 
-async function seed() {
+async function setupDB() {
     try {
         await createUsersTable()
         await createUrlsTable()
@@ -9,6 +9,4 @@ async function seed() {
     }
 }
 
-seed()
-
-
+setupDB()

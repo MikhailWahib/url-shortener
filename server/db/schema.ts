@@ -11,7 +11,6 @@ export const createUrlsTable = async (): Promise<void> => {
         );
     `
     await db.query(query)
-    console.log("URLs Table created")
 }
 
 export const createUsersTable = async (): Promise<void> => {
@@ -23,7 +22,6 @@ export const createUsersTable = async (): Promise<void> => {
 		);
 	`
     await db.query(query)
-    console.log("Users Table created")
 }
 
 
