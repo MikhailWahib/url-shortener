@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express"
-import userRoutes from "./users"
-import urlsRoutes from "./urls"
+import userRoutes from "./user.route"
+import urlsRoutes from "./url.route"
 import { protect } from "../middlewares/protect"
 
 const router = Router()
