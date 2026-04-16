@@ -2,6 +2,7 @@ import { createRootRouteWithContext, createRoute, createRouter, redirect } from 
 
 import App from "@/App"
 import type { AuthContextType } from "@/context/auth"
+import type { Url } from "@/types"
 import HomeView from "@/views/HomeView"
 import LoginView from "@/views/LoginView"
 import SignupView from "@/views/SignupView"
@@ -17,6 +18,24 @@ const homeRoute = createRoute({
     if (!context.auth.user) {
       throw redirect({ to: "/login" })
     }
+  },
+  loader: async () => {
+    const apiUrl = import.meta.env.VITE_API_URL
+    const response = await fetch(`${apiUrl}/api/v1/users/urls`, {
+      method: "GET",
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    if (response.status === 401) {
+      throw redirect({ to: "/login" })
+    }
+
+    const data = (await response.json()) as { urls: Url[] }
+    return data.urls
   },
   component: HomeView,
 })

@@ -1,49 +1,15 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "@tanstack/react-router"
+import { useLoaderData, useRouter } from "@tanstack/react-router"
 
 import UrlForm from "@/components/UrlForm"
 import UrlsList from "@/components/UrlsList"
-import { useAuth } from "@/context/auth"
 import type { Url } from "@/types"
 
 export default function HomeView() {
-  const [urls, setUrls] = useState<Url[]>([])
-  const navigate = useNavigate()
-  const { setUser } = useAuth()
+  const urls = useLoaderData({ from: "/" }) as Url[]
+  const router = useRouter()
 
-  useEffect(() => {
-    const getUrls = async () => {
-      const apiUrl = import.meta.env.VITE_API_URL
-
-      try {
-        const response = await fetch(`${apiUrl}/api/v1/users/urls`, {
-          method: "GET",
-          credentials: "include",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-
-        const data = (await response.json()) as { urls: Url[] }
-
-        if (response.status === 401) {
-          setUser(null)
-          navigate({ to: "/login" })
-          return
-        }
-
-        setUrls(data.urls)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    void getUrls()
-  }, [navigate, setUser])
-
-  const handleUrlSubmit = (url: Url) => {
-    setUrls((prevUrls) => [url, ...prevUrls])
+  const handleUrlSubmit = (_url: Url) => {
+    router.invalidate()
   }
 
   return (
