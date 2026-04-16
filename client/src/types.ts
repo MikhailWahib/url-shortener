@@ -1,11 +1,11 @@
-export interface IUser {
-	id: number
-	username: string
+export interface User {
+  id: number
+  username: string
 }
 
-export interface UrlObj {
-	id: number
-	originalUrl: string
-	shortUrl: string
-	clicks: number
+export interface Url {
+  id: number
+  originalUrl: string
+  shortUrl: string
+  clicks: number
 }

@@ -1,6 +1,6 @@
 # URL Shortener
 
-A simple URL shortener with a Vue frontend and an Express/Node backend.
+A simple URL shortener with a React frontend and an Express/Node backend.
 
 ## Prerequisites
 
@@ -23,12 +23,12 @@ Start the development environment:
 pnpm run dev
 ```
 
-- App frontend available via Vite dev server
-- API server runs with Nodemon
+- Frontend runs via Vite
+- Backend API runs with Nodemon
 
 ## Build
 
-Build the app and server:
+Build the frontend and backend:
 
 ```bash
 pnpm run build
