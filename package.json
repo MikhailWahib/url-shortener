@@ -16,7 +16,7 @@
     "test": "pnpm --filter @url-shortener/client test && pnpm --filter @url-shortener/server test"
   },
   "devDependencies": {
-    "concurrently": "^9.0.0"
+    "concurrently": "^9.2.1"
   },
   "engines": {
     "node": ">=20.0.0",
