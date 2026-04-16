@@ -5,11 +5,12 @@ import { useNavigate } from "@tanstack/react-router"
 import { useAuth } from "@/context/auth"
 import type { Url } from "@/types"
 
-import "./UrlForm.css"
-
 type UrlFormProps = {
   onSubmit: (url: Url) => void
 }
+
+const submitButtonClassName =
+  "group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-sky-400 via-indigo-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-950/30 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-950/40 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
 
 export default function UrlForm({ onSubmit }: UrlFormProps) {
   const [input, setInput] = useState("")
@@ -51,17 +52,24 @@ export default function UrlForm({ onSubmit }: UrlFormProps) {
   }
 
   return (
-    <form className="url-form" onSubmit={handleSubmit}>
-      <div className="input-wrapper">
+    <form className="mb-8 w-full" onSubmit={handleSubmit}>
+      <div className="flex w-full flex-col gap-3 rounded-[28px] border border-white/20 bg-white/12 p-3 shadow-2xl shadow-slate-950/25 backdrop-blur-xl md:flex-row">
         <input
           type="text"
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Enter your long URL here..."
+          className="min-h-12 flex-1 rounded-2xl border border-transparent bg-white/95 px-5 py-4 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-300 focus:ring-4 focus:ring-sky-200/50"
         />
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className={submitButtonClassName}>
           Shorten URL
-          <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            className="h-[18px] w-[18px] transition duration-200 group-hover:translate-x-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>
