@@ -1,15 +1,11 @@
 import { useState } from "react"
 import { Link, useNavigate } from "@tanstack/react-router"
-import * as Yup from "yup"
+import { z } from "zod"
 
 import { ArrowRightIcon, CheckCircleIcon, ErrorCircleIcon, LockIcon, UserIcon } from "@/components/icons"
+import { useZodForm } from "@/hooks/useZodForm"
 import Spinner from "@/components/Spinner"
 import { useAuth } from "@/context/auth"
-
-type LoginValues = {
-  username: string
-  password: string
-}
 
 type LoginResponse = {
   id?: number
@@ -17,9 +13,9 @@ type LoginResponse = {
   error?: string
 }
 
-const schema = Yup.object({
-  username: Yup.string().required("Username is required").min(6, "Username must be at least 6 characters"),
-  password: Yup.string().required("Password is required").min(6, "Password must be at least 6 characters"),
+const loginSchema = z.object({
+  username: z.string().min(6, "Username must be at least 6 characters"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 })
 
 const primaryButtonClassName =
@@ -50,59 +46,19 @@ function getFieldStyles(hasError: boolean, isValid: boolean) {
 }
 
 export default function LoginView() {
-  const [values, setValues] = useState<LoginValues>({ username: "", password: "" })
-  const [touched, setTouched] = useState<Record<keyof LoginValues, boolean>>({ username: false, password: false })
-  const [errors, setErrors] = useState<Partial<Record<keyof LoginValues, string>>>({})
   const [isLoading, setIsLoading] = useState(false)
   const [resError, setResError] = useState<string | undefined>()
+
+  const { values, errors, touched, handleChange, handleBlur, validate } = useZodForm(loginSchema)
 
   const { setUser } = useAuth()
   const navigate = useNavigate()
 
-  const validateField = async (field: keyof LoginValues, value: string) => {
-    try {
-      await schema.validateAt(field, { ...values, [field]: value })
-      setErrors((prev) => ({ ...prev, [field]: undefined }))
-    } catch (error) {
-      if (error instanceof Error) {
-        const message = error.message
-        setErrors((prev) => ({ ...prev, [field]: message }))
-      }
-    }
-  }
-
-  const handleChange = (field: keyof LoginValues, value: string) => {
-    setValues((prev) => ({ ...prev, [field]: value }))
-    if (touched[field]) {
-      void validateField(field, value)
-    }
-  }
-
-  const handleBlur = (field: keyof LoginValues) => {
-    setTouched((prev) => ({ ...prev, [field]: true }))
-    void validateField(field, values[field])
-  }
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setTouched({ username: true, password: true })
     setResError(undefined)
 
-    try {
-      await schema.validate(values, { abortEarly: false })
-      setErrors({})
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const nextErrors: Partial<Record<keyof LoginValues, string>> = {}
-        error.inner.forEach((item) => {
-          if (item.path) {
-            nextErrors[item.path as keyof LoginValues] = item.message
-          }
-        })
-        setErrors(nextErrors)
-        return
-      }
-    }
+    if (!validate()) return
 
     setIsLoading(true)
     const apiUrl = import.meta.env.VITE_API_URL
@@ -156,9 +112,7 @@ export default function LoginView() {
             <label htmlFor="username" className="ml-1 text-sm font-semibold text-slate-100">
               Username
             </label>
-            <div
-              className={`group flex items-center rounded-2xl border transition duration-200 ${usernameStyles.wrapper}`}
-            >
+            <div className={`group flex items-center rounded-2xl border transition duration-200 ${usernameStyles.wrapper}`}>
               <UserIcon className={`ml-4 h-5 w-5 shrink-0 transition ${usernameStyles.icon}`} />
               <input
                 id="username"
@@ -186,9 +140,7 @@ export default function LoginView() {
             <label htmlFor="password" className="ml-1 text-sm font-semibold text-slate-100">
               Password
             </label>
-            <div
-              className={`group flex items-center rounded-2xl border transition duration-200 ${passwordStyles.wrapper}`}
-            >
+            <div className={`group flex items-center rounded-2xl border transition duration-200 ${passwordStyles.wrapper}`}>
               <LockIcon className={`ml-4 h-5 w-5 shrink-0 transition ${passwordStyles.icon}`} />
               <input
                 id="password"

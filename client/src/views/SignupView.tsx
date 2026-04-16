@@ -1,93 +1,44 @@
 import { useState } from "react"
 import { Link, useNavigate } from "@tanstack/react-router"
 import { toast } from "react-toastify"
-import * as Yup from "yup"
+import { z } from "zod"
 
 import { ArrowRightIcon, LockIcon, UserIcon } from "@/components/icons"
+import { useZodForm } from "@/hooks/useZodForm"
 import Spinner from "@/components/Spinner"
-
-type SignupValues = {
-  username: string
-  password: string
-  confirmPassword: string
-}
 
 type SignupResponse = {
   message?: string
   error?: string
 }
 
-const schema = Yup.object({
-  username: Yup.string().required("Username is required").min(6, "Username must be at least 6 characters"),
-  password: Yup.string().required("Password is required").min(6, "Password must be at least 6 characters"),
-  confirmPassword: Yup.string()
-    .required("Confirm Password is required")
-    .oneOf([Yup.ref("password")], "Passwords must match"),
-})
+const signupSchema = z
+  .object({
+    username: z.string().min(6, "Username must be at least 6 characters"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Confirm Password is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  })
 
 const primaryButtonClassName =
   "group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-sky-400 via-indigo-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-950/30 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-950/40 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
 
 export default function SignupView() {
-  const [values, setValues] = useState<SignupValues>({ username: "", password: "", confirmPassword: "" })
-  const [touched, setTouched] = useState<Record<keyof SignupValues, boolean>>({
-    username: false,
-    password: false,
-    confirmPassword: false,
-  })
-  const [errors, setErrors] = useState<Partial<Record<keyof SignupValues, string>>>({})
   const [isLoading, setIsLoading] = useState(false)
   const [resError, setResError] = useState<string | undefined>()
 
+  const { values, errors, touched, handleChange, handleBlur, validate } = useZodForm(signupSchema)
+
   const navigate = useNavigate()
-
-  const validateField = async (field: keyof SignupValues, value: string) => {
-    try {
-      await schema.validateAt(field, { ...values, [field]: value })
-      setErrors((prev) => ({ ...prev, [field]: undefined }))
-    } catch (error) {
-      if (error instanceof Error) {
-        const message = error.message
-        setErrors((prev) => ({ ...prev, [field]: message }))
-      }
-    }
-  }
-
-  const handleChange = (field: keyof SignupValues, value: string) => {
-    setValues((prev) => ({ ...prev, [field]: value }))
-    if (touched[field]) {
-      void validateField(field, value)
-    }
-    if (field === "password" && touched.confirmPassword) {
-      void validateField("confirmPassword", values.confirmPassword)
-    }
-  }
-
-  const handleBlur = (field: keyof SignupValues) => {
-    setTouched((prev) => ({ ...prev, [field]: true }))
-    void validateField(field, values[field])
-  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setTouched({ username: true, password: true, confirmPassword: true })
     setResError(undefined)
 
-    try {
-      await schema.validate(values, { abortEarly: false })
-      setErrors({})
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const nextErrors: Partial<Record<keyof SignupValues, string>> = {}
-        error.inner.forEach((item) => {
-          if (item.path) {
-            nextErrors[item.path as keyof SignupValues] = item.message
-          }
-        })
-        setErrors(nextErrors)
-        return
-      }
-    }
+    if (!validate()) return
 
     setIsLoading(true)
     const apiUrl = import.meta.env.VITE_API_URL
