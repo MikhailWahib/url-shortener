@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { RouterProvider } from "@tanstack/react-router"
+import { Analytics } from "@vercel/analytics/react"
 
 import { AuthProvider, useAuth } from "./context/auth"
 import { router } from "./router"
@@ -18,5 +19,6 @@ ReactDOM.createRoot(document.getElementById("app")!).render(
     <AuthProvider>
       <AppRouter />
     </AuthProvider>
-  </React.StrictMode>,
+    <Analytics />
+  </React.StrictMode >,
 )
