@@ -175,7 +175,7 @@ export default function LoginView() {
           ) : null}
         </form>
 
-        <p className="text-center">
+        <p className="text-center my-8">
           <Link
             to="/signup"
             className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm font-semibold text-sky-100 transition hover:border-sky-300/40 hover:bg-sky-300/10"

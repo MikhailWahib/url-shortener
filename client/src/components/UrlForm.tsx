@@ -64,7 +64,7 @@ export default function UrlForm({ onSubmit }: UrlFormProps) {
         />
         <button type="submit" className={submitButtonClassName}>
           Shorten URL
-          <ArrowRightIcon className="h-[18px] w-[18px] transition duration-200 group-hover:translate-x-1" />
+          <ArrowRightIcon className="h-4.5 w-4.5 transition duration-200 group-hover:translate-x-1" />
         </button>
       </div>
     </form>

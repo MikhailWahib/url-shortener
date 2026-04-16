@@ -37,7 +37,6 @@ export default function Header() {
             <UrlIcon className="h-7 w-7" />
           </div>
           <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-sky-200/70">Workspace</p>
             <h1 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">URL Shortener</h1>
           </div>
         </div>

@@ -73,9 +73,9 @@ export default function SignupView() {
         <div className="absolute -right-16 top-0 h-72 w-72 rounded-full bg-sky-400/15 blur-3xl animate-[float_6s_ease-in-out_infinite]" />
         <div className="absolute -left-20 bottom-0 h-80 w-80 rounded-full bg-fuchsia-500/12 blur-3xl animate-[float_8s_ease-in-out_infinite]" />
       </div>
-      <div className="w-full max-w-md rounded-[32px] border border-white/15 bg-white/10 p-8 shadow-2xl shadow-slate-950/30 backdrop-blur-2xl sm:p-10">
+      <div className="w-full max-w-md rounded-4xl border border-white/15 bg-white/10 p-8 shadow-2xl shadow-slate-950/30 backdrop-blur-2xl sm:p-10">
         <div className="mb-10 text-center">
-          <div className="mx-auto mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-[24px] bg-gradient-to-br from-sky-400 via-indigo-500 to-fuchsia-500 shadow-lg shadow-indigo-950/30">
+          <div className="mx-auto mb-5 flex h-18 w-18 items-center justify-center rounded-3xl bg-linear-to-br from-sky-400 via-indigo-500 to-fuchsia-500 shadow-lg shadow-indigo-950/30">
             <UserIcon className="h-8 w-8 text-white" />
           </div>
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.34em] text-sky-100/70">New Account</p>
@@ -154,14 +154,7 @@ export default function SignupView() {
           ) : null}
         </form>
 
-        <div className="relative my-8 text-center">
-          <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-          <span className="relative bg-slate-900/50 px-4 text-xs uppercase tracking-[0.24em] text-slate-300">
-            Already have an account?
-          </span>
-        </div>
-
-        <p className="text-center">
+        <p className="text-center my-8">
           <Link
             to="/login"
             className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm font-semibold text-sky-100 transition hover:border-sky-300/40 hover:bg-sky-300/10"

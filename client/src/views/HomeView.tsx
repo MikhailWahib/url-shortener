@@ -21,7 +21,7 @@ export default function HomeView() {
       </div>
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-[26px] border border-white/20 bg-white/12 shadow-2xl shadow-slate-950/25 backdrop-blur-xl">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-3xl border border-white/20 bg-white/12 shadow-2xl shadow-slate-950/25 backdrop-blur-xl">
             <UrlIcon className="h-9 w-9 text-sky-200" />
           </div>
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.34em] text-sky-100/70">Link Console</p>
