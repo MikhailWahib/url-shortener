@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "@tanstack/react-router"
 import * as Yup from "yup"
 
+import { ArrowRightIcon, CheckCircleIcon, ErrorCircleIcon, LockIcon, UserIcon } from "@/components/icons"
 import Spinner from "@/components/Spinner"
 import { useAuth } from "@/context/auth"
 
@@ -140,13 +141,10 @@ export default function LoginView() {
         <div className="absolute -right-16 top-0 h-72 w-72 rounded-full bg-sky-400/15 blur-3xl animate-[float_6s_ease-in-out_infinite]" />
         <div className="absolute -left-20 bottom-0 h-80 w-80 rounded-full bg-fuchsia-500/12 blur-3xl animate-[float_8s_ease-in-out_infinite]" />
       </div>
-      <div className="w-full max-w-md rounded-[32px] border border-white/15 bg-white/10 p-8 shadow-2xl shadow-slate-950/30 backdrop-blur-2xl sm:p-10">
+      <div className="w-full max-w-md rounded-4xl border border-white/15 bg-white/10 p-8 shadow-2xl shadow-slate-950/30 backdrop-blur-2xl sm:p-10">
         <div className="mb-10 text-center">
-          <div className="mx-auto mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-[24px] bg-gradient-to-br from-sky-400 via-indigo-500 to-fuchsia-500 shadow-lg shadow-indigo-950/30">
-            <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
+          <div className="mx-auto mb-5 flex h-18 w-18 items-center justify-center rounded-3xl bg-linear-to-br from-sky-400 via-indigo-500 to-fuchsia-500 shadow-lg shadow-indigo-950/30">
+            <LockIcon className="h-8 w-8 text-white" />
           </div>
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.34em] text-sky-100/70">Account Access</p>
           <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Welcome back</h2>
@@ -161,10 +159,7 @@ export default function LoginView() {
             <div
               className={`group flex items-center rounded-2xl border transition duration-200 ${usernameStyles.wrapper}`}
             >
-              <svg className={`ml-4 h-5 w-5 shrink-0 transition ${usernameStyles.icon}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
+              <UserIcon className={`ml-4 h-5 w-5 shrink-0 transition ${usernameStyles.icon}`} />
               <input
                 id="username"
                 type="text"
@@ -177,14 +172,9 @@ export default function LoginView() {
               {usernameTouched ? (
                 <div className="mr-4 flex h-5 w-5 items-center justify-center">
                   {errors.username ? (
-                    <svg className="h-[18px] w-[18px] text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M15 9l-6 6M9 9l6 6" />
-                    </svg>
+                    <ErrorCircleIcon className="h-4.5 w-4.5 text-rose-400" />
                   ) : (
-                    <svg className="h-[18px] w-[18px] text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
+                    <CheckCircleIcon className="h-4.5 w-4.5 text-emerald-500" />
                   )}
                 </div>
               ) : null}
@@ -199,10 +189,7 @@ export default function LoginView() {
             <div
               className={`group flex items-center rounded-2xl border transition duration-200 ${passwordStyles.wrapper}`}
             >
-              <svg className={`ml-4 h-5 w-5 shrink-0 transition ${passwordStyles.icon}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
+              <LockIcon className={`ml-4 h-5 w-5 shrink-0 transition ${passwordStyles.icon}`} />
               <input
                 id="password"
                 type="password"
@@ -215,14 +202,9 @@ export default function LoginView() {
               {passwordTouched ? (
                 <div className="mr-4 flex h-5 w-5 items-center justify-center">
                   {errors.password ? (
-                    <svg className="h-[18px] w-[18px] text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M15 9l-6 6M9 9l6 6" />
-                    </svg>
+                    <ErrorCircleIcon className="h-4.5 w-4.5 text-rose-400" />
                   ) : (
-                    <svg className="h-[18px] w-[18px] text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
+                    <CheckCircleIcon className="h-4.5 w-4.5 text-emerald-500" />
                   )}
                 </div>
               ) : null}
@@ -241,26 +223,13 @@ export default function LoginView() {
           ) : null}
         </form>
 
-        <div className="relative my-8 text-center">
-          <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-          <span className="relative bg-slate-900/50 px-4 text-xs uppercase tracking-[0.24em] text-slate-300">New here?</span>
-        </div>
-
         <p className="text-center">
           <Link
             to="/signup"
             className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm font-semibold text-sky-100 transition hover:border-sky-300/40 hover:bg-sky-300/10"
           >
             Create an account
-            <svg
-              className="h-[18px] w-[18px] transition duration-200 group-hover:translate-x-1"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <ArrowRightIcon className="h-4.5 w-4.5 transition duration-200 group-hover:translate-x-1" />
           </Link>
         </p>
       </div>

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "@tanstack/react-router"
 import { toast } from "react-toastify"
 import * as Yup from "yup"
 
+import { ArrowRightIcon, LockIcon, UserIcon } from "@/components/icons"
 import Spinner from "@/components/Spinner"
 
 type SignupValues = {
@@ -124,10 +125,7 @@ export default function SignupView() {
       <div className="w-full max-w-md rounded-[32px] border border-white/15 bg-white/10 p-8 shadow-2xl shadow-slate-950/30 backdrop-blur-2xl sm:p-10">
         <div className="mb-10 text-center">
           <div className="mx-auto mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-[24px] bg-gradient-to-br from-sky-400 via-indigo-500 to-fuchsia-500 shadow-lg shadow-indigo-950/30">
-            <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
+            <UserIcon className="h-8 w-8 text-white" />
           </div>
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.34em] text-sky-100/70">New Account</p>
           <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Create account</h2>
@@ -140,10 +138,7 @@ export default function SignupView() {
               Username
             </label>
             <div className="flex items-center rounded-2xl border border-white/60 bg-white/90 transition duration-200 focus-within:border-sky-300 focus-within:ring-4 focus-within:ring-sky-200/70">
-              <svg className="ml-4 h-5 w-5 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
+              <UserIcon className="ml-4 h-5 w-5 shrink-0 text-slate-400" />
               <input
                 id="username"
                 type="text"
@@ -162,10 +157,7 @@ export default function SignupView() {
               Password
             </label>
             <div className="flex items-center rounded-2xl border border-white/60 bg-white/90 transition duration-200 focus-within:border-sky-300 focus-within:ring-4 focus-within:ring-sky-200/70">
-              <svg className="ml-4 h-5 w-5 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
+              <LockIcon className="ml-4 h-5 w-5 shrink-0 text-slate-400" />
               <input
                 id="password"
                 type="password"
@@ -184,10 +176,7 @@ export default function SignupView() {
               Confirm Password
             </label>
             <div className="flex items-center rounded-2xl border border-white/60 bg-white/90 transition duration-200 focus-within:border-sky-300 focus-within:ring-4 focus-within:ring-sky-200/70">
-              <svg className="ml-4 h-5 w-5 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
+              <LockIcon className="ml-4 h-5 w-5 shrink-0 text-slate-400" />
               <input
                 id="confirmPassword"
                 type="password"
@@ -227,15 +216,7 @@ export default function SignupView() {
             className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm font-semibold text-sky-100 transition hover:border-sky-300/40 hover:bg-sky-300/10"
           >
             Sign in here
-            <svg
-              className="h-4 w-4 transition duration-200 group-hover:translate-x-1"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <ArrowRightIcon className="h-4 w-4 transition duration-200 group-hover:translate-x-1" />
           </Link>
         </p>
       </div>

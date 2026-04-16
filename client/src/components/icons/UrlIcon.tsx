@@ -1,11 +1,14 @@
-export default function UrlIcon({ size = 24 }: { size?: number }) {
+interface IconProps {
+  className?: string
+}
+
+export default function UrlIcon({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
+      className={className}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#FFF"
+      stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

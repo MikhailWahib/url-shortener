@@ -2,6 +2,7 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 import { useNavigate } from "@tanstack/react-router"
 
+import { ArrowRightIcon } from "@/components/icons"
 import { useAuth } from "@/context/auth"
 import type { Url } from "@/types"
 
@@ -63,15 +64,7 @@ export default function UrlForm({ onSubmit }: UrlFormProps) {
         />
         <button type="submit" className={submitButtonClassName}>
           Shorten URL
-          <svg
-            className="h-[18px] w-[18px] transition duration-200 group-hover:translate-x-1"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
+          <ArrowRightIcon className="h-[18px] w-[18px] transition duration-200 group-hover:translate-x-1" />
         </button>
       </div>
     </form>
